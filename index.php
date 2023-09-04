@@ -30,9 +30,37 @@
         <input type="submit" value="Créer l'opérateur">
     </form>
 
-    <?php
 
+
+    <!-- ajouter destination a une TO-->
+    <h2>Ajouter une Destination à un Tour-Opérateur</h2>
+    <form action="processTourOperator.php" method="POST" enctype="multipart/form-data">
+    <label for="location">location :</label>
+    <input type="text" id="location" name="location" required>
+    <label for="price">price :</label>
+    <input type="numbre" id="price" name="price" required>
+
+
+
+    
+    <label for="tourOperator">Tour-Opérateur :</label>
+    <?php
+$sql = "SELECT name FROM tour_operator ";
+$result = $bdd->query($sql);
+
+
+$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+echo '<select name="tour_operator">'; 
+foreach ($rows as $row) {
+    echo '<option value="' .  $row['name'] . '">' . $row['name'] . '</option>';
+}
+echo '</select>';
     ?>
+    <input type="submit" name="addDestination" value="Ajouter">
+    </form>
 </body>
 
 </html>

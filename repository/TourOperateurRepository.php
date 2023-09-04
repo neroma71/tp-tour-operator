@@ -124,16 +124,16 @@ class TourOperateurRepository
     {
         try {
             // Préparez une requête SQL pour insérer un nouvel enregistrement dans la table tour_operator
-            $query = "INSERT INTO tour_operator (location, price, tour_operator_id) 
+            $query = "INSERT INTO destination (location, price, tour_operator_id) 
                           VALUES (:location, :price, :tour_operator_id)";
 
             // Utilisez PDO pour préparer la requête
             $stmt = $this->bdd->prepare($query);
 
             // Associez les valeurs des propriétés de l'objet TourOperateur aux paramètres de la requête
-            $stmt->bindValue(':location', $destination->getName());
-            $stmt->bindValue(':price', $destination->getLink());
-            $stmt->bindValue(':tour_operator_id', $destination->getGradeCount());
+            $stmt->bindValue(':location', $destination->getlocation());
+            $stmt->bindValue(':price', $destination->getprice());
+            $stmt->bindValue(':tour_operator_id', $destination->gettour_operator_id());
 
             // Exécutez la requête pour insérer l'enregistrement dans la base de données
             $stmt->execute();
