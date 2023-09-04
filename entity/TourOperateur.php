@@ -8,6 +8,7 @@ Class TourOperateur {
     private $gradeCount;
     private $GradeTotal;
     private $isPremium;
+    private $img;
 
     public function __construct($data){
         $this->hydrate($data);
@@ -38,6 +39,10 @@ Class TourOperateur {
             if(isset($datas["is_premium"]))
             {
                 $this->setisPremium($datas["is_premium"]);
+            }
+            if(isset($datas["img"]))
+            {
+                $this->setimg($datas["img"]);
             }
         }
 
@@ -158,6 +163,26 @@ Class TourOperateur {
     public function setIsPremium($isPremium)
     {
         $this->isPremium = $isPremium;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of img
+     */ 
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * Set the value of img
+     *
+     * @return  self
+     */ 
+    public function setImg($img)
+    {
+        $this->img = $img;
 
         return $this;
     }
