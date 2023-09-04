@@ -1,5 +1,5 @@
 <?php
-$dns = "mysql:host=localhost;dbname=poo";
+$dns = "mysql:host=localhost;dbname=comparo_simple";
 $user = "root";
 $password = "";
 
