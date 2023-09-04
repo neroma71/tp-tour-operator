@@ -102,6 +102,10 @@
             {
                 $this->setMessage($datas["message"]);
             }
+            if(isset($datas["author"]))
+            {
+                $this->setAuthor($datas["author"]);
+            }
             if(isset($datas["tour_operator_id"]))
             {
                 $this->setTour_operator_id($datas["tour_operator_id"]);
