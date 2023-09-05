@@ -59,5 +59,106 @@
 
     return $reviews;
 }
+public function getAllOperator()
+{
+    $query = 'SELECT * FROM tour_operator';
+    $result = $this->db->query($query);
+    $tourOperatorsData = $result->fetchAll();
+    $tourOperators = [];
+
+    foreach ($tourOperatorsData as $tourOperator) {
+        $tourOperators[] = new TourOperateur($tourOperator);
+    }
+
+    return $tourOperators;
+}
+
+public function updateOperatorToPremium($operatorId)
+{
+    $query = 'UPDATE tour_operator SET is_premium = 1 WHERE id = :operatorId';
+
+    try {
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':operatorId', $operatorId, PDO::PARAM_INT);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+    }
+}
+
+public function createTourOperator(TourOperateur $tourOperateur)
+{
+    try {
+        // Préparez une requête SQL pour insérer un nouvel enregistrement dans la table tour_operator
+        $query = "INSERT INTO tour_operator (name, link, grade_count, grade_total, is_premium, img) 
+                  VALUES (:name, :link, :grade_count, :grade_total, :is_premium, :img)";
+
+    $uploadedFile = $_FILES['img'];
+    if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+
+    // Définir le chemin où enregistrer le fichier
+    $uploadDir = './uploads/'; // Répertoire où vous souhaitez stocker les images
+    $uploadPath = $uploadDir . basename($uploadedFile['name']);
+
+    // Déplacer le fichier vers le répertoire d'upload
+    move_uploaded_file($uploadedFile['tmp_name'], $uploadPath);
+
+    // Enregistrement du chemin dans la base de données
+    $tourOperateur->setImg($uploadPath);
+    }
+        // Utilisez PDO pour préparer la requête
+        $stmt = $this->db->prepare($query);
+
+        // Associez les valeurs des propriétés de l'objet TourOperateur aux paramètres de la requête
+        $stmt->bindValue(':name', $tourOperateur->getName());
+        $stmt->bindValue(':link', $tourOperateur->getLink());
+        $stmt->bindValue(':grade_count', $tourOperateur->getGradeCount());
+        $stmt->bindValue(':grade_total', $tourOperateur->getGradeTotal());
+        $stmt->bindValue(':is_premium', $tourOperateur->getIsPremium());
+        $stmt->bindValue(':img', $tourOperateur->getImg());
+
+        // Exécutez la requête pour insérer l'enregistrement dans la base de données
+        $stmt->execute();
+
+        // Vous pouvez gérer les succès ou les erreurs ici
+        // Par exemple, retourner l'identifiant de l'enregistrement inséré
+        return $this->db->lastInsertId();
+    } 
+    catch (PDOException $e) {
+        // Gestion des erreurs
+        // Vous pouvez enregistrer l'erreur dans un journal, afficher un message d'erreur, etc.
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // Ou tout autre traitement d'erreur que vous préférez
+    }
+}
+
+public function createDestination(Destination $destination)
+{
+    try {
+        // Préparez une requête SQL pour insérer un nouvel enregistrement dans la table tour_operator
+        $query = "INSERT INTO tour_operator (location, price, tour_operator_id) 
+                      VALUES (:location, :price, :tour_operator_id)";
+
+        // Utilisez PDO pour préparer la requête
+        $stmt = $this->db->prepare($query);
+
+        // Associez les valeurs des propriétés de l'objet TourOperateur aux paramètres de la requête
+        $stmt->bindValue(':location', $destination->getLocation());
+        $stmt->bindValue(':price', $destination->getPrice());
+        $stmt->bindValue(':tour_operator_id', $destination->getTour_operator_id());
+
+        $stmt->execute();
+
+        // Vous pouvez gérer les succès ou les erreurs ici
+        // Par exemple, retourner l'identifiant de l'enregistrement inséré
+        $destination = $this->db->lastInsertId();
+        return $destination;
+    } catch (PDOException $e) {
+        // Gestion des erreurs
+        // Vous pouvez enregistrer l'erreur dans un journal, afficher un message d'erreur, etc.
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // Ou tout autre traitement d'erreur que vous préférez
+    }
+}
 
     }
