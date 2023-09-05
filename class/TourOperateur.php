@@ -1,14 +1,13 @@
 <?php
 
-Class TourOperateur {
-
+Class TourOperateur 
+{
     private int $id;
     private string $name;
     private string $link;
-    private int $gradeCount;
-    private int $GradeTotal;
-    private bool $isPremium;
-    private string $img;
+    private int $grade_count;
+    private int $grade_total;
+    private bool $is_premium;
 
     public function __construct($data){
         $this->hydrate($data);
@@ -30,19 +29,15 @@ Class TourOperateur {
             }
             if(isset($datas["grade_count"]))
             {
-                $this->setGradeCount($datas["grade_count"]);
+                $this->setGrade_count($datas["grade_count"]);
             }
             if(isset($datas["grade_total"]))
             {
-                $this->setGradeTotal($datas["grade_total"]);
+                $this->setGrade_total($datas["grade_total"]);
             }
             if(isset($datas["is_premium"]))
             {
-                $this->setisPremium($datas["is_premium"]);
-            }
-            if(isset($datas["img"]))
-            {
-                $this->setimg($datas["img"]);
+                $this->setIs_premium($datas["is_premium"]);
             }
         }
 
@@ -108,81 +103,61 @@ Class TourOperateur {
     }
 
     /**
-     * Get the value of gradeCount
+     * Get the value of grade_count
      */ 
-    public function getGradeCount()
+    public function getGrade_count()
     {
-        return $this->gradeCount;
+        return $this->grade_count;
     }
 
     /**
-     * Set the value of gradeCount
+     * Set the value of grade_count
      *
      * @return  self
      */ 
-    public function setGradeCount($gradeCount)
+    public function setGrade_count($grade_count)
     {
-        $this->gradeCount = $gradeCount;
+        $this->grade_count = $grade_count;
 
         return $this;
     }
 
     /**
-     * Get the value of GradeTotal
+     * Get the value of grade_total
      */ 
-    public function getGradeTotal()
+    public function getGrade_total()
     {
-        return $this->GradeTotal;
+        return $this->grade_total;
     }
 
     /**
-     * Set the value of GradeTotal
+     * Set the value of grade_total
      *
      * @return  self
      */ 
-    public function setGradeTotal($GradeTotal)
+    public function setGrade_total($grade_total)
     {
-        $this->GradeTotal = $GradeTotal;
+        $this->grade_total = $grade_total;
 
         return $this;
     }
 
     /**
-     * Get the value of isPremium
+     * Get the value of is_premium
      */ 
-    public function getIsPremium()
+    public function getIs_premium()
     {
-        return $this->isPremium;
+        return $this->is_premium;
     }
 
     /**
-     * Set the value of isPremium
+     * Set the value of is_premium
      *
      * @return  self
      */ 
-    public function setIsPremium($isPremium)
+    public function setIs_premium($is_premium)
     {
-        $this->isPremium = $isPremium;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of img
-     */ 
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
-     * Set the value of img
-     *
-     * @return  self
-     */ 
-    public function setImg($img)
-    {
-        $this->img = $img;
+        $this->is_premium = $is_premium;
 
         return $this;
     }

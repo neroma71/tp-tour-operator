@@ -1,0 +1,28 @@
+.affichage{
+    margin-top:100px;
+}
+.affichage a{
+    position:relative;
+    display:block;
+    height:200px;
+    width:200px;
+    color:white;
+    text-decoration:none;
+    overflow-x:hidden;
+}
+.dest{
+    position:absolute;
+    width:100%;
+    left:0;
+    top:70%;
+    text-align:center;
+    background:black;
+}
+.prix{
+    position:absolute;
+    width:100%;
+    left:0;
+    top:82%;
+    text-align:center;
+    background:black;
+}

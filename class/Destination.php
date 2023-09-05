@@ -1,12 +1,11 @@
 <?php
-
-include_once('./connect/connect.php');
-class Destination {
-
+    class Destination 
+    {
     private $id;
     private $location;
     private $price;
     private $tour_operator_id;
+    private $image;
 
     public function __construct(array $datas)
         {
@@ -93,6 +92,26 @@ class Destination {
         return $this;
     }
 
+     /**
+     * Get the value of image
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
     public function hydrate(array $datas)
     {
         if(isset($datas["id"]))
@@ -101,7 +120,7 @@ class Destination {
         }
         if(isset($datas["location"]))
         {
-            $this->setLocation($datas["message"]);
+            $this->setLocation($datas["location"]);
         }
         if (isset($datas["price"])) {
             $this->setPrice($datas["price"]);
@@ -109,6 +128,10 @@ class Destination {
         if(isset($datas["tour_operator_id"]))
         {
             $this->setTour_operator_id($datas["tour_operator_id"]);
+        }
+        if(isset($datas["image"]))
+        {
+            $this->setImage($datas["image"]);
         }
      
     }
