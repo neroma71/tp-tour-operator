@@ -54,6 +54,29 @@
         <input type="file" id="img" name="img" accept="image/*">
         <input type="submit" value="Ajouter">
     </form>
+
+    <form action="processPremium.php" method="post">
+    <h2>Mettre à jour un Tour-Opérateur</h2>
+    <label for="tour_operator_id">Sélectionnez le Tour-Opérateur :</label>
+    <select id="tour_operator_id" name="tour_operator_id">
+    <?php
+    $sql = "SELECT id, name FROM tour_operator";
+    $result = $bdd->query($sql);
+    $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($rows as $row) {
+        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+    }
+    ?>
+    </select>
+    <label for="is_premium">Passer en Premium :</label>
+    <select id="is_premium" name="is_premium">
+        <option value="0">Non</option>
+        <option value="1">Oui</option>
+    </select>
+    <label for="link">Site web :</label>
+    <input type="text" id="link" name="link">
+    <input type="submit" name="updateOperator" value="Mettre à jour">
+</form>
 </body>
 
 </html>

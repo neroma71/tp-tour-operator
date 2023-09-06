@@ -218,6 +218,21 @@ public function getTourOperatorsByDestinationId($destinationId)
         }
     }
 
+    public function IdFromTourOperator($id) {
+        $sql = "SELECT * FROM tour_operator WHERE id = :id";
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Vérifiez si une ligne a été trouvée avant de retourner l'identifiant
+        if ($row) {
+            return $row['id'];
+        } else {
+            return null; // ou une valeur par défaut appropriée
+        }
+    }
+
     /**
      * Get the value of bdd
      */

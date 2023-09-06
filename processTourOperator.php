@@ -36,6 +36,9 @@
     } else {
         echo "Une erreur s'est produite lors de la création de l'opérateur.";
     }
+
+    
+
     ?>
 </body>
 
