@@ -10,19 +10,20 @@ class TourOperateurRepository
         $this->setbdd($bdd);
     }
 
-    public function getAllDestination()
-    {
-        $query = 'SELECT * FROM destination';
-        $result = $this->bdd->query($query);
-        $destinationsData = $result->fetchAll();
-        $destinations = [];
+    public function getAllDestinations()
+{
+    $query = 'SELECT * FROM destination GROUP BY location';
+    $stmt = $this->bdd->query($query);
+    $destinationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $destinations = [];
 
-        foreach ($destinationsData as $destination) {
-            $destinations[] = new Destination($destination);
-        }
-
-        return $destinations;
+    foreach ($destinationsData as $destinationData) {
+        $destination = new Destination($destinationData);
+        $destinations[] = $destination;
     }
+
+    return $destinations;
+}
 
     public function getDestinationById($destinationId)
 {
@@ -37,6 +38,45 @@ class TourOperateurRepository
         return new Destination($destinationData);
     } else {
         return null; // La destination avec cet ID n'a pas été trouvée
+    }
+}
+
+public function getDestinationByLocation($destinationLocation)
+{
+    $query = 'SELECT * FROM destination WHERE location = :location';
+    $stmt = $this->bdd->prepare($query);
+    $stmt->bindParam(':location', $destinationLocation, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $destinationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $destinations = [];
+
+    if ($destinationsData) {
+        foreach($destinationsData as $destinationData)
+        {
+            $destinations[] = new Destination($destinationData);
+        }
+         return $destinations;
+         var_dump($destinations);
+    } else {
+        return null; 
+    }
+}
+
+public function getTourOperatorById($operatorId)
+{
+    $query = 'SELECT * FROM tour_operator WHERE id = :operatorId';
+    $stmt = $this->bdd->prepare($query);
+    $stmt->bindParam(':operatorId', $operatorId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $tourOperatorData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($tourOperatorData) {
+        return new TourOperateur($tourOperatorData);
+    } else {
+        return null; // L'opérateur de tour avec cet ID n'a pas été trouvé
     }
 }
 

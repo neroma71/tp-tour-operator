@@ -1,10 +1,10 @@
 <?php
     require_once("./utils/db_connect.php"); 
-    require_once("./utils/loadClass.php"); 
+    require_once("./utils/loadClass.php");
     
     $manager = new TourOperateurRepository($bdd);
 
-    $destinations = $manager->getAllDestination();
+    $destinations = $manager->getAllDestinations();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,13 +17,13 @@
 </head>
 <body>
     <header>
-        <h1>Comparo FR</h1>
+        <h1>Comparo.FR</h1>
     </header>
     <section>
         <div class="row justify-content-center affichage">
            
         <?php  foreach ($destinations as $destination): ?> 
-               <a href="liste.php?id=<?php echo $destination->getId(); ?>" class="col-3 m-3" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
+               <a href="liste.php?location=<?php echo $destination->getLocation(); ?>" class="col-3 m-3" style="background:url('<?php echo $destination->getImg(); ?>')top center no-repeat; background-size:cover;">
                 <p class="dest">Destination : <?php echo $destination->getLocation(); ?></p>
                 <p class="prix">Prix <?php echo $destination->getPrice(); ?> €</p>
         </a>
