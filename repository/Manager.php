@@ -62,12 +62,14 @@
 public function getAllOperator()
 {
     $query = 'SELECT * FROM tour_operator';
-    $result = $this->db->query($query);
-    $tourOperatorsData = $result->fetchAll();
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+
+    $tourOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $tourOperators = [];
 
-    foreach ($tourOperatorsData as $tourOperator) {
-        $tourOperators[] = new TourOperateur($tourOperator);
+    foreach ($tourOperatorsData as $tourOperatorData) {
+        $tourOperators[] = new TourOperateur($tourOperatorData);
     }
 
     return $tourOperators;
@@ -87,12 +89,13 @@ public function getTourOperatorById($operatorId)
         return null; // L'opérateur de tour avec cet ID n'a pas été trouvé
     }
 }
-
-public function getTourOperatorsByDestinationId($destinationId)
+/*
+public function getTourOperatorByDestinationId($destinationId)
 {
-    $query = 'SELECT * FROM tour_operator WHERE id IN (SELECT tour_operator_id FROM destination WHERE id = :destinationId)';
+    $query = 'SELECT * FROM tour_operator WHERE id= :id';
+    
     $stmt = $this->db->prepare($query);
-    $stmt->bindParam(':destinationId', $destinationId, PDO::PARAM_INT);
+    $stmt->bindValue(':destinationId', $destinationId, PDO::PARAM_INT);
     $stmt->execute();
 
     $tourOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -104,8 +107,7 @@ public function getTourOperatorsByDestinationId($destinationId)
 
     return $tourOperators;
 }
-
-
+*/
 public function updateOperatorToPremium(TourOperateur $operatorId)
 {
     $query = 'UPDATE tour_operator SET is_premium = 1 WHERE id = :operatorId';
@@ -185,7 +187,7 @@ public function createDestination(Destination $destination)
 
 public function getAllDestinations()
 {
-    $query = 'SELECT * FROM destination';
+    $query = 'SELECT * FROM destination GROUP BY location';
     $stmt = $this->db->query($query);
     $destinationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $destinations = [];
@@ -211,6 +213,28 @@ public function getDestinationById($destinationId)
         return new Destination($destinationData);
     } else {
         return null; // La destination avec cet ID n'a pas été trouvée
+    }
+}
+public function getDestinationByLocation($destinationLocation)
+{
+    $query = 'SELECT * FROM destination WHERE location = :location';
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':location', $destinationLocation, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $destinationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    $destinations = [];
+
+    if ($destinationsData) {
+        foreach($destinationsData as $destinationData)
+        {
+            $destinations[] = new Destination($destinationData);
+        }
+         return $destinations;
+         var_dump($destinations);
+    } else {
+        return null; 
     }
 }
 

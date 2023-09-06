@@ -4,33 +4,32 @@ require_once("./utils/autoload.php");
 
 $manager = new Manager($bdd);
 
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $destinationId = $_GET['id'];
+if (isset($_GET['location']) && !empty($_GET['location'])) {
+   
+   
+ 
+    $destinations = $manager->getDestinationByLocation($_GET['location']);
+    var_dump($destinations);
 
-    $destination = $manager->getDestinationById($destinationId);
-
-    if ($destination) {
-        echo '<h2>' . $destination->getLocation() . '</h2>';
-        echo '<p>Prix : ' . $destination->getPrice() . '</p>';
+    if ($destinations) {
+        echo '<h2>' . $destinations[0]->getLocation() . '</h2>';
         
-        // Récupérez les tour opérateurs qui proposent cette destination
-        $tourOperators = $manager->getTourOperatorsByDestinationId($destinationId);
         
-        if (!empty($tourOperators)) {
-            echo '<h3>Tour Opérateurs :</h3>';
-            echo '<ul>';
-            foreach ($tourOperators as $tourOperator) {
+        echo '<h3>Tour Opérateurs :</h3>';
+        echo '<ul>';
+            foreach ($destinations as $destination) {
+                $tourOperator = $manager->getTourOperatorById($destination->getTour_operator_id());
                 echo '<li>' . $tourOperator->getName() . '</li>';
+                echo '<li>' . $tourOperator->getLink() . '</li>';
             }
-            echo '</ul>';
-        } else {
-            echo '<p>Aucun Tour Opérateur ne propose cette destination.</p>';
-        }
+        echo '</ul>';
+        
+          
     } else {
         echo '<p>Destination non trouvée.</p>';
     }
 } else {
-    echo '<p>Aucune destination sélectionnée.</p>';
+    echo '<p>Destination non valide.</p>';
 }
 ?>
 <!DOCTYPE html>

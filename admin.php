@@ -37,21 +37,21 @@ require_once("./utils/autoload.php");
 
 <!-- ajouter destination a une TO-->
         <h2>Ajouter une Destination à un Tour-Opérateur</h2>
-<form method="post" action="traitement.php" enctype="multipart/form-data">
-    <label for="location">location :</label>
-    <input type="text" id="location" name="location">
-    <label for="price">price :</label>
-    <input type="number" id="price" name="price">
-<label for="tour_operator_id">Tour-Opérateur :</label>
-<select name="tour_operator_id">
-    <option>rentrer un tour operator</option>
-    <?php
-      $tourOps = $manager->getAllOperator();
+    <form method="post" action="traitement.php" enctype="multipart/form-data">
+        <label for="location">location :</label>
+        <input type="text" id="location" name="location">
+        <label for="price">price :</label>
+        <input type="number" id="price" name="price">
+        <label for="tour_operator_id">Tour-Opérateur :</label>
+        <select name="tour_operator_id">
+        <option>rentrer un tour operator</option>
+        <?php
+        $tourOps = $manager->getAllOperator();
             foreach ($tourOps as $tourOp) {
-        echo '<option value="'.$tourOp->getId().'">'.$tourOp->getName().'</option>';
-            }
-    ?>
-</select>
+                 echo '<option value="'.$tourOp->getId().'">'.$tourOp->getName().'</option>';
+                }
+        ?>
+    </select>
         <input type="file" name="image">
         <input type="submit" value="Ajouter">
     </form>
