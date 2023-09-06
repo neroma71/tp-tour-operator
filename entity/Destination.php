@@ -1,52 +1,16 @@
 <?php
-
-include_once('./connect/connect.php');
-class Destination {
-
+    class Destination 
+    {
     private $id;
     private $location;
     private $price;
     private $tour_operator_id;
-    private $bdd;
+    private $img;
 
-    public function __construct($bdd)
-    {
-     $this->bdd =$bdd;
-    }
-
-    public function getDestinationById($tour_operator_id) {
-        $query = "SELECT * FROM destinations WHERE id = :$tour_operator_id";
-        $stmt = $this->bdd->prepare($query);
-        $stmt->bindParam(':id', $tour_operator_id);
-        $stmt->execute();
-        $bddData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $this->hydrate($bddData);
-
-        
-    }
-
-      /* au lieu on fait la hydrate 
-      $this->id = $row['id'];
-        $this->location = $row['location'];
-        $this->price = $row['price'];
-        $this->tourOperatorId = $row['tourOperatorId'];
-        */
-
-    public function Hydrate($bdd){
-        if (isset($bdd['id'])){
-            $this->id = $bdd['id'];
+    public function __construct(array $datas)
+        {
+            $this->hydrate($datas);
         }
-        if (isset($bdd['location'])){
-            $this->id = $bdd['location'];
-        }
-        if (isset($bdd['price'])){
-            $this->id = $bdd['price'];
-        }
-        if (isset($bdd['tour_operator_id'])){
-            $this->id = $bdd['tour_operator_id'];
-        }
-    }
 
     /**
      * Get the value of id
@@ -128,31 +92,49 @@ class Destination {
         return $this;
     }
 
-    /**
-     * Get the value of bdd
+     /**
+     * Get the value of image
      */ 
-    public function getBdd()
+    public function getImg()
     {
-        return $this->bdd;
+        return $this->img;
     }
 
     /**
-     * Set the value of bdd
+     * Set the value of image
      *
      * @return  self
      */ 
-    public function setBdd($bdd)
+    public function setImg($img)
     {
-        $this->bdd = $bdd;
+        $this->img = $img;
 
         return $this;
     }
+
+    public function hydrate(array $datas)
+    {
+        if(isset($datas["id"]))
+        {
+            $this->setId($datas["id"]);
+        }
+        if(isset($datas["location"]))
+        {
+            $this->setLocation($datas["location"]);
+        }
+        if (isset($datas["price"])) {
+            $this->setPrice($datas["price"]);
+        }
+        if(isset($datas["tour_operator_id"]))
+        {
+            $this->setTour_operator_id($datas["tour_operator_id"]);
+        }
+        if(isset($datas["img"]))
+        {
+            $this->setImg($datas["img"]);
+        }
+     
+    }
 }
-
-$destination = new Destination($bdd);
-$destination->getDestinationById(2);
-$destination->hydrate($bddData);
-
-echo ($bddData);
 
 ?>

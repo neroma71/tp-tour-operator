@@ -1,66 +1,37 @@
+<?php
+    require_once("./utils/db_connect.php"); 
+    require_once("./utils/loadClass.php"); 
+    
+    $manager = new TourOperateurRepository($bdd);
+
+    $destinations = $manager->getAllDestination();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <?php
-
-    require_once './Utils/db_connect.php';
-    require_once './Utils/loadClass.php';
-    ?>
-
-    <form action="processTourOperator.php" method="POST" enctype="multipart/form-data">
-        <label for="name">Nom :</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="link">Lien :</label>
-        <input type="text" id="link" name="link" required><br>
-
-        <label for="is_premium">Premium :</label>
-        <input type="checkbox" id="is_premium" name="is_premium"><br>
-
-        <label for="img">Image :</label>
-        <input type="file" id="img" name="img" accept="image/*">
-
-        <input type="submit" value="Créer l'opérateur">
-    </form>
-
-
-
-    <!-- ajouter destination a une TO-->
-    <h2>Ajouter une Destination à un Tour-Opérateur</h2>
-    <form action="processTourOperator.php" method="POST" enctype="multipart/form-data">
-    <label for="location">location :</label>
-    <input type="text" id="location" name="location" required>
-    <label for="price">price :</label>
-    <input type="numbre" id="price" name="price" required>
-
-
-
-    
-    <label for="tourOperator">Tour-Opérateur :</label>
-    <?php
-$sql = "SELECT name FROM tour_operator ";
-$result = $bdd->query($sql);
-
-
-$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-echo '<select name="tour_operator">'; 
-foreach ($rows as $row) {
-    echo '<option value="' .  $row['name'] . '">' . $row['name'] . '</option>';
-}
-echo '</select>';
-    ?>
-    <input type="submit" name="addDestination" value="Ajouter">
-    </form>
+    <header>
+        <h1>Comparo FR</h1>
+    </header>
+    <section>
+        <div class="row justify-content-center affichage">
+           
+        <?php  foreach ($destinations as $destination): ?> 
+               <a href="liste.php?id=<?php echo $destination->getId(); ?>" class="col-3 m-3" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
+                <p class="dest">Destination : <?php echo $destination->getLocation(); ?></p>
+                <p class="prix">Prix <?php echo $destination->getPrice(); ?> €</p>
+        </a>
+        <?php endforeach; ?>
+           
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 </body>
-
 </html>

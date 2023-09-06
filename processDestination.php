@@ -20,7 +20,7 @@
 
     // Créer un objet TourOperateur avec les données
     $destination = new Destination([
-        'location' => $name,
+        'location' => $location,
         'price' => $price,
         'tour_operator_id' => $tour_operator_id
     ]);
@@ -29,12 +29,12 @@
     $tourOperateurRepository = new TourOperateurRepository($bdd);
 
     // Appeler la méthode createTourOperator pour insérer le nouvel opérateur
-    $insertedId = $tourOperateurRepository->createTourOperator($tourOperateur);
+    $insertedId = $tourOperateurRepository->createDestination($destination);
 
     if ($insertedId !== false) {
-        echo "L'opérateur a été créé avec l'identifiant $insertedId.";
+        echo "La destination a été créé avec l'identifiant $insertedId.";
     } else {
-        echo "Une erreur s'est produite lors de la création de l'opérateur.";
+        echo "Une erreur s'est produite lors de la création de la destination.";
     }
     ?>
 </body>

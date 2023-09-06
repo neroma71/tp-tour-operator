@@ -24,6 +24,38 @@ class TourOperateurRepository
         return $destinations;
     }
 
+    public function getDestinationById($destinationId)
+{
+    $query = 'SELECT * FROM destination WHERE id = :destinationId';
+    $stmt = $this->bdd->prepare($query);
+    $stmt->bindParam(':destinationId', $destinationId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $destinationData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($destinationData) {
+        return new Destination($destinationData);
+    } else {
+        return null; // La destination avec cet ID n'a pas été trouvée
+    }
+}
+
+public function getTourOperatorsByDestinationId($destinationId)
+{
+    $query = 'SELECT * FROM tour_operator WHERE id IN (SELECT tour_operator_id FROM destination WHERE id = :destinationId)';
+    $stmt = $this->bdd->prepare($query);
+    $stmt->bindParam(':destinationId', $destinationId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $tourOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $tourOperators = [];
+
+    foreach ($tourOperatorsData as $tourOperatorData) {
+        $tourOperators[] = new TourOperateur($tourOperatorData);
+    }
+
+    return $tourOperators;
+}
 
     public function getOperatorByDestination()
     {
@@ -39,13 +71,37 @@ class TourOperateurRepository
         return $locations;
     }
 
-    public function createReview()
-    {
-    }
+    public function createReview(Review $review)
+        {
+            $req = $this->bdd->prepare('INSERT INTO review (message, author, tour_operator_id) VALUE (:message, :author, :tour_operator_id)');
 
-    public function getReviewByOperaroId()
-    {
-    }
+
+            $req->execute([
+                'message' => $review->getMessage(),
+                'author' => $review->getAuthor(),
+                'tour_operator_id' => $review->getTour_operator_id(),
+            
+            ]);
+            $review = $this->bdd->lastInsertId();
+            return $review;
+        }
+
+        public function getReviewsByTourOperatorId(int $tourOperatorId)
+        {
+            $sql = 'SELECT * FROM review WHERE tour_operator_id = :tour_operator_id';
+            $stmt = $this->bdd->prepare($sql);
+            $stmt->bindParam(':tour_operator_id', $tourOperatorId, PDO::PARAM_INT);
+            $stmt->execute();
+        
+            // Récupérez les résultats sous forme d'un tableau d'objets Review
+            $reviews = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $review = new Review($row);
+                $reviews[] = $review;
+            }
+        
+            return $reviews;
+        }
 
     public function getAllOperator()
     {
@@ -124,16 +180,29 @@ class TourOperateurRepository
     {
         try {
             // Préparez une requête SQL pour insérer un nouvel enregistrement dans la table tour_operator
-            $query = "INSERT INTO destination (location, price, tour_operator_id) 
-                          VALUES (:location, :price, :tour_operator_id)";
-
+            $query = "INSERT INTO destination (location, price, tour_operator_id, img) 
+                          VALUES (:location, :price, :tour_operator_id, :img)";
+                $uploadedFile = $_FILES['img'];
+                if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+        
+                // Définir le chemin où enregistrer le fichier
+                $uploadDir = './uploads/'; // Répertoire où vous souhaitez stocker les images
+                $uploadPath = $uploadDir . basename($uploadedFile['name']);
+        
+                // Déplacer le fichier vers le répertoire d'upload
+                move_uploaded_file($uploadedFile['tmp_name'], $uploadPath);
+        
+                // Enregistrement du chemin dans la base de données
+                $destination->setImg($uploadPath);
+                }
             // Utilisez PDO pour préparer la requête
             $stmt = $this->bdd->prepare($query);
 
             // Associez les valeurs des propriétés de l'objet TourOperateur aux paramètres de la requête
-            $stmt->bindValue(':location', $destination->getlocation());
-            $stmt->bindValue(':price', $destination->getprice());
-            $stmt->bindValue(':tour_operator_id', $destination->gettour_operator_id());
+            $stmt->bindValue(':location', $destination->getLocation());
+            $stmt->bindValue(':price', $destination->getPrice());
+            $stmt->bindValue(':tour_operator_id', $destination->getTour_operator_id());
+            $stmt->bindValue(':img', $destination->getImg());
 
             // Exécutez la requête pour insérer l'enregistrement dans la base de données
             $stmt->execute();
