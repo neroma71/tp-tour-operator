@@ -1,3 +1,31 @@
+
+<?php
+session_start();
+// Mot de passe à vérifier
+$motDePasseAttendu = "admin123"; // Changez ceci par votre mot de passe réel
+
+// Vérifier si le formulaire de connexion a été soumis
+if (isset($_POST['connexion'])) {
+    $motDePasseSoumis = $_POST['mot_de_passe'];
+
+    // Vérifier si le mot de passe soumis correspond au mot de passe attendu
+    if ($motDePasseSoumis === $motDePasseAttendu) {
+        // Authentification réussie, stockez un indicateur de connexion en session
+        $_SESSION['authenticated'] = true;
+    } else {
+        echo "Mot de passe incorrect. Veuillez réessayer.";
+    }
+}
+
+// Vérifier si l'administrateur est connecté
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+    // L'administrateur n'est pas connecté, redirigez-le vers la page de connexion
+    header("Location: pageDeConnexion.php");
+    exit();
+}
+
+// L'administrateur est connecté, affichez la page d'administration
+?>
 <!DOCTYPE html>
 <html lang="en">
 
