@@ -101,8 +101,6 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
         <option value="0">Non</option>
         <option value="1">Oui</option>
     </select>
-    <label for="link">Site web :</label>
-    <input type="text" id="link" name="link">
     <input type="submit" name="updateOperator" value="Mettre à jour">
 </form>
 </body>

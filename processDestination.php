@@ -33,6 +33,8 @@
 
     if ($insertedId !== false) {
         echo "La destination a été créé avec l'identifiant $insertedId.";
+        header("Location: admin.php");
+        exit();
     } else {
         echo "Une erreur s'est produite lors de la création de la destination.";
     }

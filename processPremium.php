@@ -14,8 +14,10 @@
             $stmt->bindParam(':is_premium', $isPremium, PDO::PARAM_INT);
             $stmt->bindParam(':id', $tourOperatorId, PDO::PARAM_INT);
             $stmt->execute();
-    
+            
             echo "Le statut premium du tour-opérateur a été mis à jour avec succès.";
+            header("Location: admin.php");
+            exit();
         } catch (PDOException $e) {
             echo "Erreur : " . $e->getMessage();
         }
