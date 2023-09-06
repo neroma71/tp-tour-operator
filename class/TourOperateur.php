@@ -9,7 +9,7 @@ Class TourOperateur
     private int $grade_total;
     private bool $is_premium;
 
-    public function __construct(array $data){
+    public function __construct($data){
         $this->hydrate($data);
     }
 

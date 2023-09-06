@@ -89,13 +89,13 @@ public function getTourOperatorById($operatorId)
         return null; // L'opérateur de tour avec cet ID n'a pas été trouvé
     }
 }
-/*
-public function getTourOperatorByDestinationId($destinationId)
+
+public function getTourOperatorsByDestinationId($destinationId)
 {
-    $query = 'SELECT * FROM tour_operator WHERE id= :id';
+    $query = 'SELECT * FROM tour_operator WHERE id = :destinationId';
     
     $stmt = $this->db->prepare($query);
-    $stmt->bindValue(':destinationId', $destinationId, PDO::PARAM_INT);
+    $stmt->bindParam(':destinationId', $destinationId, PDO::PARAM_INT);
     $stmt->execute();
 
     $tourOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -107,7 +107,7 @@ public function getTourOperatorByDestinationId($destinationId)
 
     return $tourOperators;
 }
-*/
+
 public function updateOperatorToPremium(TourOperateur $operatorId)
 {
     $query = 'UPDATE tour_operator SET is_premium = 1 WHERE id = :operatorId';
@@ -232,10 +232,29 @@ public function getDestinationByLocation($destinationLocation)
             $destinations[] = new Destination($destinationData);
         }
          return $destinations;
-         var_dump($destinations);
     } else {
         return null; 
     }
 }
-
+    public function getDestinationsByTourOperatorId($tourOperatorId)
+    {
+        $query = 'SELECT * FROM destination WHERE tour_operator_id  = :id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $tourOperatorId, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        $destinationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $destinations = [];
+    
+        if ($destinationsData) {
+            foreach($destinationsData as $destinationData)
+            {
+                $destinations[] = new Destination($destinationData);
+            }
+             return $destinations;
+        } else {
+            return null; 
+        }
+    }
 }
