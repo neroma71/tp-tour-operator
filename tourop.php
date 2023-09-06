@@ -64,7 +64,8 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
         echo '<p>' . $tourOperator->getIs_premium() . '</p>';  
     }
     ?>
-<div class="content">
+    <div class="row d-flex justify-content-center">
+<div class="col-6 content">
     <?php foreach($destinations as $destination): ?>
         <div class="destination" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
             <h4>Destination : <?php echo $destination->getLocation(); ?></h4>
@@ -72,25 +73,26 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
         </div>
     <?php endforeach; ?>
 </div>
-<section class="messagerie">
+<div class="col-6 messagerie">
     <div class="msg">
         <?php foreach ($reviews as $review) : ?>
             <p>Auteur : <?php echo $review->getAuthor(); ?></p>
             <p>Message : <?php echo $review->getMessage(); ?></p>
         <?php endforeach; ?>
     </div>
-    <form method="post" action="">
-        <p>
-            <input type="text" name="author" placeholder="rentrer votre nom">
-        </p>
-        <p>
-            <input type="text" name="message" placeholder="taper votre message ici" id="mymsg">
-        </p>
-        <input type="hidden" name="tour_operator_id" value="<?php echo $tourOperatorId; ?>">
-        <p>
-            <input type="submit" value ="envoyer" />
-        </p>
-    </form>
-</section>
+            <form method="post" action="">
+            <p>
+                <input type="text" name="author" placeholder="rentrer votre nom">
+            </p>
+            <p>
+                <input type="text" name="message" placeholder="taper votre message ici" id="mymsg">
+            </p>
+            <input type="hidden" name="tour_operator_id" value="<?php echo $tourOperatorId; ?>">
+             <p>
+                <input type="submit" value ="envoyer" />
+            </p>
+                </form>
+            </div>
+</div>
 </body>
 </html>

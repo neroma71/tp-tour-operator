@@ -17,7 +17,7 @@ require_once("./utils/autoload.php");
     <h1>Page d'Administration</h1>
     
     <!-- ajouter TO -->
-    <form action="traitement.php" method="post">
+    <form action="traitement.php" method="post" enctype="multipart/form-data">
     <h2>Ajouter un Tour-Opérateur</h2>
     <label for="name">Nom du Tour-Opérateur :</label>
     <input type="text" id="name" name="name" required>
@@ -32,6 +32,7 @@ require_once("./utils/autoload.php");
     </select>
     <label for="link">Lien :</label>
     <input type="text" id="link" name="link">
+    <input type="file" name="image">
     <input type="submit" value="Ajouter">
 </form>
 

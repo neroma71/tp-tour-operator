@@ -32,9 +32,9 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
         echo '<div class="row d-felx justify-content-center affichage">';
             foreach ($destinations as $destination) {
                 $tourOperator = $manager->getTourOperatorById($destination->getTour_operator_id());
-                echo '<a href="tourop.php?id='.$tourOperator->getId().'">';
+                echo '<a href="tourop.php?id=' . $tourOperator->getId() . '" style="background:url(' . $tourOperator->getImage() . ')">';
                     echo '<p>' . $tourOperator->getName() . '</p>';
-                     echo '<p>' . $tourOperator->getLink() . '</p>';
+                     echo '<p>mail : ' . $tourOperator->getLink() . '</p>';
                 echo '</a>';
             }
         echo '</div>';

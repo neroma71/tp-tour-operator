@@ -8,38 +8,11 @@ Class TourOperateur
     private int $grade_count;
     private int $grade_total;
     private bool $is_premium;
+    private string $image;
 
-    public function __construct($data){
+    public function __construct(array $data){
         $this->hydrate($data);
     }
-
-    public function hydrate(array $datas)
-        {
-            if(isset($datas["id"]))
-            {
-                $this->setid($datas["id"]);
-            }
-            if(isset($datas["name"]))
-            {
-                $this->setname($datas["name"]);
-            }
-            if(isset($datas["link"]))
-            {
-                $this->setlink($datas["link"]);
-            }
-            if(isset($datas["grade_count"]))
-            {
-                $this->setGrade_count($datas["grade_count"]);
-            }
-            if(isset($datas["grade_total"]))
-            {
-                $this->setGrade_total($datas["grade_total"]);
-            }
-            if(isset($datas["is_premium"]))
-            {
-                $this->setIs_premium($datas["is_premium"]);
-            }
-        }
 
 
     /**
@@ -160,6 +133,58 @@ Class TourOperateur
         $this->is_premium = $is_premium;
 
         return $this;
+    }
+
+    /**
+     * Get the value of image
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function hydrate(array $datas)
+    {
+        if(isset($datas["id"]))
+        {
+            $this->setid($datas["id"]);
+        }
+        if(isset($datas["name"]))
+        {
+            $this->setname($datas["name"]);
+        }
+        if(isset($datas["link"]))
+        {
+            $this->setlink($datas["link"]);
+        }
+        if(isset($datas["grade_count"]))
+        {
+            $this->setGrade_count($datas["grade_count"]);
+        }
+        if(isset($datas["grade_total"]))
+        {
+            $this->setGrade_total($datas["grade_total"]);
+        }
+        if(isset($datas["is_premium"]))
+        {
+            $this->setIs_premium($datas["is_premium"]);
+        }
+        if(isset($datas["image"]))
+        {
+            $this->setImage($datas["image"]);
+        }
     }
 }
 

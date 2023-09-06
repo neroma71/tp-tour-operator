@@ -12,7 +12,7 @@ header{
     position:fixed;
     height:120px;
     width:100%;
-    background:black;
+    background:#1f1f1f;
 }
 h1{
     position:fixed;
@@ -23,7 +23,7 @@ h1{
 }
 .content{
     position:absolute;
-    width:50%;
+    width:500px;
     left:50px;
     height:auto;
 }
@@ -58,13 +58,13 @@ h4{
 }
 .msg{
     position:relative;
-    width:340px;
+    width:430px;
     height:300px; 
     padding:5px;
     overflow-y:auto;
 }
 form{
-    background:black;
+    background:#1f1f1f;
     padding-bottom:5px;
 }
 input[type=text]{

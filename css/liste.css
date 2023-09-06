@@ -7,7 +7,7 @@ header{
     height:120px;
     top:0;
     left:0;
-    background:black;
+    background:#1f1f1f;
 }
 h1{
     position:fixed;
@@ -31,5 +31,13 @@ h1{
     color:black;
     text-decoration:none;
     border:1px solid lightgray;
+    text-align:center;
     overflow-x:hidden;
+}
+.affichage a p{
+    position:relative;
+    width:200px;
+    left:-14px;
+    background:#1f1f1f;
+    color:white;
 }

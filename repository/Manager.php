@@ -125,8 +125,8 @@ public function createTourOperator(TourOperateur $tourOperateur)
 {
     try {
       
-        $query = "INSERT INTO tour_operator (name, link, grade_count, grade_total, is_premium) 
-                  VALUES (:name, :link, :grade_count, :grade_total, :is_premium)";
+        $query = "INSERT INTO tour_operator (name, link, grade_count, grade_total, is_premium, image) 
+                  VALUES (:name, :link, :grade_count, :grade_total, :is_premium, :image)";
     
         $stmt = $this->db->prepare($query);
 
@@ -135,6 +135,20 @@ public function createTourOperator(TourOperateur $tourOperateur)
         $stmt->bindValue(':grade_count', $tourOperateur->getGrade_count());
         $stmt->bindValue(':grade_total', $tourOperateur->getGrade_total());
         $stmt->bindValue(':is_premium', $tourOperateur->getIs_premium());
+        $stmt->bindValue(':image', $tourOperateur->getImage());
+
+        $uploadedFile = $_FILES['image'];
+        if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
+           
+            $uploadDir = 'uploads/'; 
+            $uploadPath = $uploadDir . basename($uploadedFile['name']);
+    
+            
+            move_uploaded_file($uploadedFile['tmp_name'], $uploadPath);
+    
+          
+            $tourOperateur->setImage($uploadPath);
+        }
 
         $stmt->execute();
         return $this->db->lastInsertId();

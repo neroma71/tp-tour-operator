@@ -9,28 +9,43 @@ if (
     !empty($_POST['grade_count']) &&
     !empty($_POST['grade_total']) &&
     isset($_POST['is_premium']) &&
-    isset($_POST['link'])
+    isset($_POST['link']) &&
+    !empty($_FILES['image']) &&
+    $_FILES['image']['error'] === UPLOAD_ERR_OK
 ) {
+
+    $uploadDir = 'uploads/';
+    $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+      
+        $imagePath = $uploadFile;  
+
     $name = $_POST['name'];
     $gradeCount = $_POST['grade_count'];
     $gradeTotal = $_POST['grade_total'];
     $isPremium = $_POST['is_premium'];
     $link = $_POST['link'];
+    $image = $_FILES['image'];
 
     $tourOpData = [
         'name' => $_POST['name'],
         'grade_count' => $_POST['grade_count'],
         'grade_total' => $_POST['grade_total'],
         'is_premium' => $_POST['is_premium'],
-        'link' => $_POST['link']
+        'link' => $_POST['link'],
+        'image' => $imagePath 
     ];
 
     $tourOps = new TourOperateur($tourOpData);
 
     $manager->createTourOperator($tourOps);
     header('location: http://localhost/tp-tour-operator/admin.php');
+ } else{
+        echo "Erreur lors du téléchargement de l'image.";
+    } 
 }
-
+///////////formulaire location////////////
 if (
     !empty($_POST['location']) &&
     !empty($_POST['price']) &&
