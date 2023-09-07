@@ -46,13 +46,6 @@ class Manager
             'id' => $tourOperator->getId(),
         ]);
      
-        // ICI FAIRE UN UPDATE DU TOUR OPERATEUR (LE GRADE_COUNT ET LE GRADE_TOTAL)
-
-        // $req = $this->db->prepare('INSERT INTO tour_operator (grade_count) VALUE (:grade_count)');
-        // $req->execute([
-        //     'grade_count' => $tourOperator->getGrade_count(),
-        // ]);
-
         $review = $this->db->lastInsertId();
         return $review;
     }

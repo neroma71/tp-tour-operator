@@ -20,8 +20,23 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
     </head>
     <body>
         <header>
+        <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <h1>Comparo.FR</h1>
         </header>
+        <div class="container">
         <?php
         if ($destinations) {
             echo '<section>';
@@ -30,21 +45,25 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
             echo '<h3>Liste des Tours Opérateurs :</h3>';
             echo '</div>';
             echo '<div class="row d-flex justify-content-center affichage">';
+        }else {
+                echo '<p>Destination non trouvée.</p>';
+            }
+        } else {
+            echo '<p>Destination non valide.</p>';
+        }
             foreach ($destinations as $destination) {
                 $tourOperator = $manager->getTourOperatorById($destination->getTour_operator_id());
-                echo '<a href="tourop.php?id=' . $tourOperator->getId() . '" style="background:url(' . $tourOperator->getImage() . ')">';
+                echo '<a href="tourop.php?id=' . $tourOperator->getId() . '" style="background:url(' . $tourOperator->getImage() . ')" class="col-3">';
                 echo '<p>' . $tourOperator->getName() . '</p>';
                 echo '<p>mail : ' . $tourOperator->getLink() . '</p>';
                 echo '</a>';
             }
             echo '</div>';
             echo '</section>';
-        } else {
-            echo '<p>Destination non trouvée.</p>';
-        }
-    } else {
-        echo '<p>Destination non valide.</p>';
-    }
     ?>
+    </div>
+    <footer>dsfdf</footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     </body>
     </html>

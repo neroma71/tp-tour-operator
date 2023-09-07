@@ -1,5 +1,18 @@
 body{
     overflow-x:hidden;
+    width:100vw;
+    min-height:100vh;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction: column;
+}
+.container{
+    min-height:100vh;
+    width:100vw;
+    margin:0;
+    padding:0;
+    flex-wrap: 1;
 }
 header{
     position:fixed;
@@ -7,14 +20,36 @@ header{
     height:120px;
     top:0;
     left:0;
-    background:black;
+    background: linear-gradient(#c0e00b, yellow);
+    border-bottom:1px solid #c0e00b;
+    z-index:100;
+}
+nav{
+    height:40px;
+    border-bottom:1px solid white;
+}
+.navbar-toggler{
+    margin-top:-10px;
 }
 h1{
     position:fixed;
     width:100%;
-    top:20px;
+    top:40px;
     color:white;
     text-align:center;
+}
+h2{
+    width:100%;
+    text-align:center;
+    color:rgb(34, 75, 170);
+}
+.background{
+    position:relative;
+    height:500px;
+    width:105%;
+    left:-15px;
+    background:url(../images/rio.jpg)top center no-repeat;
+    background-size:cover;
 }
 .affichage{
     margin-top:150px;
@@ -34,7 +69,7 @@ h1{
     left:0;
     top:70%;
     text-align:center;
-    background:black;
+    background:rgb(34, 75, 170);
 }
 .prix{
     position:absolute;
@@ -42,5 +77,17 @@ h1{
     left:0;
     top:82%;
     text-align:center;
-    background:black;
+    background:rgb(34, 75, 170);
+}
+.col-3{
+    position:relative;
+    margin-bottom:20px;
+}
+footer{
+    position:relative;
+    min-height:120px;
+    width:100%;
+    margin-top:200px;
+    bottom:0;
+   background: linear-gradient(#c0e00b, yellow);
 }

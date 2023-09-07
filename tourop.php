@@ -23,14 +23,6 @@ if (isset($_POST['author']) && !empty($_POST['author']) && isset($_POST['message
 
     if (!empty($_POST['grade_total'])) {
 
-        // var_dump($tourOperatorData);
-        // die();
-        // $tourOperatorData = [
-        //     'id' => $tourOperatorId,
-        // ];
-        
-        // $tourOperator = new TourOperateur($tourOperatorData);
-
         $tourOperator->setGrade_count($tourOperator->getGrade_count() + 1);
         $tourOperator->setGrade_total($tourOperator->getGrade_total() + $grade_total);
 
@@ -63,25 +55,42 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
 </head>
 <body>
         <header>
+        <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <h1>Comparo.FR</h1>
         </header>
-    <section class="container">
+    <section class="container-fluid">
     <div class="row d-flex justify-content-center">
-    <div class="col-12 text-center agence">
-        <?php
+    <div class="col-12 bg">
+        
+    </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 text-center agence">
+    <?php
         if ($tourOperator) {
             $destinations = $manager->getDestinationsByTourOperatorId   ($tourOperator->getId());
-
             echo '<h2>Agence : ' . $tourOperator->getName() . '</h2>';
-            echo '<p> Site :' . $tourOperator->getLink() . '</p>';
+            echo '<p><a href"mailto:'.$tourOperator->getLink().'"> Site :' . $tourOperator->getLink() . '</a></p>';
             echo '<p> Note : ' . $tourOperator->getGrade_count() . '</p>';
             echo '<p> Note totale : ' . $tourOperator->getGrade_total() . '</p>';
+            echo '<div class="logo" style="background:url('.$tourOperator->getImage().')center no-repeat fixed; background-size:contain;"></div>';
         }
     ?>
     </div>
-    </div>
-    <div class="row d-flex justify-content-center m-1">
-<div class="col-12 col-md-6 mb-5 content">
+<div class="col-12 col-md-7 mb-5 content">
     <?php foreach($destinations as $destination): ?>
         <div class="destination" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
             <h4>Destination : <?php echo $destination->getLocation(); ?></h4>
@@ -89,7 +98,7 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
         </div>
     <?php endforeach; ?>
 </div>
-    <div class="col-12 col-md-6 messagerie">
+    <div class="col-12 col-md-3 messagerie">
         <div class="msg">
             <?php foreach ($reviews as $review) : ?>
                 <p>Auteur : <?php echo $review->getAuthor(); ?></p>
@@ -104,8 +113,8 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
                     <input type="text" name="message" placeholder="taper votre message ici" id="mymsg">
                 </p>
                 <input type="hidden" name="tour_operator_id" value="<?php echo $tourOperatorId; ?>">
-                
                 <p>
+                    <label>attribuer une notre</label><br />
                     <input type="number" name="grade_total" min="0" max="5">
                 </p>
                 <p>
@@ -115,5 +124,12 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
     </div>
 </div>
 </section>
+
+<script>
+            let bg = document.querySelector('.bg');
+            window.addEventListener('scroll', ()=>{
+                bg.style.backgroundPositionY = window.scrollY / 1.5 + 'px';
+            });
+        </script>
 </body>
 </html>
