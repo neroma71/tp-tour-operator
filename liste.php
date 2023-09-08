@@ -30,7 +30,7 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                                <a class="nav-link active text-light" aria-current="page" href="index.php">Home</a>
                             </li>
                         </ul>
                     </div>
@@ -38,10 +38,11 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
             </nav>
             <h1>Comparo.FR</h1>
         </header>
-        <div class="container">
+        <div class="container-fluid">
+            <div class="bg"></div>
         <?php
         if ($destinations) {
-            echo '<section>';
+            echo '<section class="blockaffichage">';
             echo '<div class="row text-center titre">';
             echo '<h2>destination : ' . $destinations[0]->getLocation() . '</h2>';
             echo '<h3>Liste des Tours Opérateurs :</h3>';
@@ -67,6 +68,12 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
         <footer>dsfdf</footer>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script>
+        let bg = document.querySelector('.bg');
+        window.addEventListener('scroll', () => {
+            bg.style.backgroundPositionY = -window.scrollY / 1.5 + 'px';
+        });
+    </script>
     </body>
 
     </html>

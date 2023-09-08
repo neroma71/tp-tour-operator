@@ -29,7 +29,7 @@ $destinations = $manager->getAllDestinations();
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
                             </li>
                         </ul>
                     </div>
@@ -64,9 +64,10 @@ $destinations = $manager->getAllDestinations();
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
+        let slider = document.querySelectorAll('#slider');
         let image = document.querySelectorAll('#slider img');
         let nbImage = image.length;
-        let count = 0;
+        let count = 0;       
 
         function clra() {
             for (let img of image) {
@@ -76,11 +77,16 @@ $destinations = $manager->getAllDestinations();
 
         function slideNext() {
             count++;
+            
             if (count >= nbImage) {
                 count = 0;
             }
             clra();
             image[count].classList.add("active");
+            
+            slider.innerHTML = "<p clss='title'>" + image[count].getAttribute("alt")+"</p>";
+            
+            console.log(image[count].getAttribute("alt"));
 
         }
 

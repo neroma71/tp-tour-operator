@@ -22,8 +22,7 @@ header {
     height: 120px;
     top: 0;
     left: 0;
-    background: linear-gradient(#c0e00b, yellow);
-    border-bottom: 1px solid #c0e00b;
+    background:#252626;
     z-index: 100;
 }
 
@@ -40,14 +39,14 @@ h1 {
     position: fixed;
     width: 100%;
     top: 40px;
-    color: rgb(34, 75, 170);
+    color: white;
     text-align: center;
 }
 
 h2 {
     width: 100%;
     text-align: center;
-    color: rgb(34, 75, 170);
+    color:#252626;
 }
 
 .affichage {
@@ -93,52 +92,7 @@ footer {
     width: 100%;
     margin-top: 200px;
     bottom: 0;
-    background: linear-gradient(#c0e00b, yellow);
-}
-
-ul.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: #333;
-    /* Couleur de fond */
-    overflow: hidden;
-    /* Pour gérer les éléments flottants à l'intérieur */
-}
-
-/* Style du titre */
-ul.menu h1 {
-    float: left;
-    /* Aligner le titre à gauche */
-    margin: 0;
-    /* Supprimer la marge par défaut du navigateur */
-    padding: 14px 16px;
-    /* Espace autour du texte */
-    color: white;
-    /* Couleur du texte */
-}
-
-/* Style des éléments du menu */
-ul.menu li {
-    float: right;
-    /* Aligner les éléments horizontalement à droite */
-}
-
-/* Style des liens du menu */
-ul.menu li a {
-    display: block;
-    color: white;
-    /* Couleur du texte */
-    text-align: center;
-    padding: 14px 16px;
-    /* Espace autour du texte */
-    text-decoration: none;
-}
-
-/* Style des liens du menu au survol */
-ul.menu li a:hover {
-    background-color: #555;
-    /* Couleur de fond au survol */
+    background:#252626;
 }
 
 .affichage {
@@ -298,4 +252,11 @@ h2 {
 
 #slider img.active {
     opacity: 1;
+}
+.title{
+    position:absolute;
+    top:200px;
+    left:20%;
+    color:white;
+    z-index:150;
 }

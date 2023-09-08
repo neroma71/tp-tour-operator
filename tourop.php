@@ -66,7 +66,7 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            <a class="nav-link active text-light" aria-current="page" href="index.php">Home</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +89,7 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
                     echo '<p><a href"mailto:' . $tourOperator->getLink() . '"> Site :' . $tourOperator->getLink() . '</a></p>';
                     echo '<p> Nombre de note : ' . $tourOperator->getGrade_count() . '</p>';
                     echo '<p> Note totale : ' . $tourOperator->getGrade_total() . '</p>';
-                    echo '<div class="logo" style="background:url(' . $tourOperator->getImage() . ')top center no-repeat; background-size:contain;"></div>';
+                    echo '<div class="logo" style="background:url(' . $tourOperator->getImage() . ')top right no-repeat; background-size:cover;"></div>';
                 }
                 ?>
             </div>
@@ -127,7 +127,6 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
             </div>
         </div>
     </section>
-
     <script>
         let bg = document.querySelector('.bg');
         window.addEventListener('scroll', () => {
