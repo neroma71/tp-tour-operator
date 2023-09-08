@@ -91,3 +91,142 @@ footer{
     bottom:0;
    background: linear-gradient(#c0e00b, yellow);
 }
+ul.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333; /* Couleur de fond */
+    overflow: hidden; /* Pour gérer les éléments flottants à l'intérieur */
+}
+
+/* Style du titre */
+ul.menu h1 {
+    float: left; /* Aligner le titre à gauche */
+    margin: 0; /* Supprimer la marge par défaut du navigateur */
+    padding: 14px 16px; /* Espace autour du texte */
+    color: white; /* Couleur du texte */
+}
+
+/* Style des éléments du menu */
+ul.menu li {
+    float: right; /* Aligner les éléments horizontalement à droite */
+}
+
+/* Style des liens du menu */
+ul.menu li a {
+    display: block;
+    color: white; /* Couleur du texte */
+    text-align: center;
+    padding: 14px 16px; /* Espace autour du texte */
+    text-decoration: none;
+}
+
+/* Style des liens du menu au survol */
+ul.menu li a:hover {
+    background-color: #555; /* Couleur de fond au survol */
+}
+
+.affichage{
+    margin-top:150px;
+}
+.affichage a{
+    position:relative;
+    display:block;
+    height:200px;
+    width:200px;
+    color:white;
+    text-decoration:none;
+    overflow-x:hidden;
+}
+.dest{
+    position:absolute;
+    width:100%;
+    left:0;
+    top:70%;
+    text-align:center;
+    background:black;
+}
+.prix{
+    position:absolute;
+    width:100%;
+    left:0;
+    top:82%;
+    text-align:center;
+    background:black;
+}
+.about{
+    height: 400px;
+    width: 600px;
+    text-align: center;
+    transform: translate(60%, 20%);
+    
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.col-3 m-3 {
+height: 50px;
+width: 50px;
+background-color: aqua;
+}
+
+.containerAdmin{
+    height: auto;
+    width: auto;
+    background-color: rgb(213, 213, 245);
+    padding-top: 20px;
+    padding-left: 20px;
+}
+input[type="text"],
+textarea,
+input[type="checkbox"],
+input[type="number"],
+select {
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #7985f4; /* Remplacez cette couleur par celle de votre choix */
+    color: #fff; /* Couleur du texte sur le bouton */
+    padding: 10px 20px; /* Espacement à l'intérieur du bouton */
+    border: none; /* Supprime la bordure par défaut du bouton */
+    cursor: pointer; /* Change le curseur au survol */
+    border-radius: 10px;
+  }
+  
+  select {
+    padding: 5px; 
+    font-size: 14px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    background-color: #fff; 
+    color: #333; 
+    cursor: pointer;
+  }
+  
+  
+  select:hover {
+    border-color: #555; 
+  }
+  
+  
+  select:focus {
+    border-color: #007bff; 
+  }
+
+  .destination-info{
+    height: 200px;
+    width: 600px;
+    margin-top: 20px;
+    margin-left: 20px;
+    
+  }
+
+ .menu{
+    background-image: url('../uploads/header.jpg');
+    color: black; 
+    background-size: cover;
+    background-position: center ;
+  }
