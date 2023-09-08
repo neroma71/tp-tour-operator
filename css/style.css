@@ -23,7 +23,7 @@ header {
     top: 0;
     left: 0;
     background:#252626;
-    z-index: 100;
+    z-index: 200;
 }
 
 nav {
@@ -139,7 +139,7 @@ footer {
     border-radius: 10px;
 }
 
-.col-3 m-3 {
+.col-3{
     height: 50px;
     width: 50px;
     background-color: aqua;
@@ -193,7 +193,7 @@ h2 {
 }
 
 #slider {
-    position: absolute;
+    position:absolute;
     height: 100%;
     width: 100%;
     top: 0;
@@ -220,4 +220,25 @@ h2 {
     color:white;
     z-index:150;
     opacity:1;
+}
+.text{
+    position:absolute;
+    height:100px;
+    width:100%;
+    top:120px;
+    left:0;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    background:rgba(0, 0, 0, 0.5);
+    z-index:100;
+}
+.text p{
+    font-size:25px;
+    width:50%;
+    height:50px;
+    color:white;
+    border:1px solid white;
+    text-align:center;
+    border-radius:5px;
 }

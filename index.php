@@ -42,9 +42,10 @@ $destinations = $manager->getAllDestinations();
                 <?php
                 $premiumTourOperators = $manager->getPremiumTourOperators();
                 foreach ($premiumTourOperators as $operator) {
-                    echo '<img src="' . $operator->getImage() . '" alt="' . $operator->getName() . '" class="active">';
+                    echo '<img src="' . $operator->getImage() . '" alt="'.$operator->getName()." / ".$operator->getLink().'" class="active">';
                 }
                 ?>
+                <div class="text"></div>
             </div>
         </div>
         <section>
@@ -66,8 +67,14 @@ $destinations = $manager->getAllDestinations();
     <script>
         let slider = document.querySelectorAll('#slider');
         let image = document.querySelectorAll('#slider img');
+        let text = document.querySelector('.text');
         let nbImage = image.length;
         let count = 0;       
+       
+        function imgTitle(){
+                text.innerHTML ="<p>"+ image[count].getAttribute("alt")+"</p>";
+            }
+            imgTitle();
 
         function clra() {
             for (let img of image) {
@@ -77,17 +84,12 @@ $destinations = $manager->getAllDestinations();
 
         function slideNext() {
             count++;
-            
             if (count >= nbImage) {
                 count = 0;
             }
             clra();
             image[count].classList.add("active");
-            
-            slider.innerHTML = "<p clss='title'>" + image[count].getAttribute("alt")+"</p>";
-            
-            console.log(image[count].getAttribute("alt"));
-
+            imgTitle();
         }
 
         setInterval('slideNext()', 2000);
