@@ -230,3 +230,17 @@ input[type="submit"] {
     background-size: cover;
     background-position: center ;
   }
+
+  input[type="submit"]:hover{
+    background-color: #1d69ba;
+  }
+
+  h3{
+    color:#1d69ba
+  }
+
+  h2{
+    border-bottom: 1px solid #007bff;
+    padding-bottom: 10px;
+    width:100%;
+  }
