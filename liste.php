@@ -68,12 +68,11 @@ if (isset($_GET['location']) && !empty($_GET['location'])) {
         <footer>dsfdf</footer>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script>
+    </body>
+    <script>
         let bg = document.querySelector('.bg');
         window.addEventListener('scroll', () => {
-            bg.style.backgroundPositionY = -window.scrollY / 1.5 + 'px';
+            bg.style.backgroundPositionY = window.scrollY / 1.5 + 'px';
         });
     </script>
-    </body>
-
     </html>

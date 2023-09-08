@@ -160,21 +160,6 @@ input[type="number"],
 select {
     margin-bottom: 10px;
 }
-
-input[type="submit"] {
-    background-color: #7985f4;
-    /* Remplacez cette couleur par celle de votre choix */
-    color: #fff;
-    /* Couleur du texte sur le bouton */
-    padding: 10px 20px;
-    /* Espacement à l'intérieur du bouton */
-    border: none;
-    /* Supprime la bordure par défaut du bouton */
-    cursor: pointer;
-    /* Change le curseur au survol */
-    border-radius: 10px;
-}
-
 select {
     padding: 5px;
     font-size: 14px;
@@ -184,40 +169,15 @@ select {
     color: #333;
     cursor: pointer;
 }
-
-
 select:hover {
     border-color: #555;
 }
-
-
-select:focus {
-    border-color: #007bff;
-}
-
 .destination-info {
     height: 200px;
     width: 600px;
     margin-top: 20px;
     margin-left: 20px;
-
 }
-
-.menu {
-    background-image: url('../uploads/header.jpg');
-    color: black;
-    background-size: cover;
-    background-position: center;
-}
-
-input[type="submit"]:hover {
-    background-color: #1d69ba;
-}
-
-h3 {
-    color: #1d69ba
-}
-
 h2 {
     border-bottom: 1px solid #007bff;
     padding-bottom: 10px;
@@ -255,8 +215,9 @@ h2 {
 }
 .title{
     position:absolute;
-    top:200px;
+    top:250px;
     left:20%;
     color:white;
     z-index:150;
+    opacity:1;
 }
