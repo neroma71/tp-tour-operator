@@ -38,14 +38,14 @@ class Manager
             'tour_operator_id' => $review->getTour_operator_id(),
         ]);
 
-       
+
         $req = $this->db->prepare('UPDATE tour_operator SET grade_count = :grade_count, grade_total = :grade_total WHERE id = :id');
         $req->execute([
             'grade_count' => $tourOperator->getGrade_count(),
             'grade_total' => $tourOperator->getGrade_total(),
             'id' => $tourOperator->getId(),
         ]);
-     
+
         $review = $this->db->lastInsertId();
         return $review;
     }
@@ -81,6 +81,8 @@ class Manager
 
         return $tourOperators;
     }
+
+
     public function getTourOperatorById($operatorId)
     {
         $query = 'SELECT * FROM tour_operator WHERE id = :operatorId';
@@ -277,16 +279,29 @@ class Manager
     }
 
     public function getPremiumTourOperators()
-{
-    $query = 'SELECT * FROM tour_operator WHERE is_premium = 1';
-    $stmt = $this->db->query($query);
-    $premiumOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $premiumOperators = [];
+    {
+        $query = 'SELECT * FROM tour_operator WHERE is_premium = 1';
+        $stmt = $this->db->query($query);
+        $premiumOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $premiumOperators = [];
 
-    foreach ($premiumOperatorsData as $premiumOperatorData) {
-        $premiumOperators[] = new TourOperateur($premiumOperatorData);
+        foreach ($premiumOperatorsData as $premiumOperatorData) {
+            $premiumOperators[] = new TourOperateur($premiumOperatorData);
+        }
+
+        return $premiumOperators;
     }
 
-    return $premiumOperators;
-}
+    public function updatePremium($operatorId)
+    {
+        $query = 'UPDATE tour_operator SET is_premium = 1 WHERE id = :operatorId';
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':operatorId', $operatorId, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+    }
 }

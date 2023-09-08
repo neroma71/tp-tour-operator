@@ -84,7 +84,7 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
             $destinations = $manager->getDestinationsByTourOperatorId   ($tourOperator->getId());
             echo '<h2>Agence : ' . $tourOperator->getName() . '</h2>';
             echo '<p><a href"mailto:'.$tourOperator->getLink().'"> Site :' . $tourOperator->getLink() . '</a></p>';
-            echo '<p> Note : ' . $tourOperator->getGrade_count() . '</p>';
+            echo '<p> Nombre de note : ' . $tourOperator->getGrade_count() . '</p>';
             echo '<p> Note totale : ' . $tourOperator->getGrade_total() . '</p>';
             echo '<div class="logo" style="background:url('.$tourOperator->getImage().')top center no-repeat; background-size:contain;"></div>';
         }

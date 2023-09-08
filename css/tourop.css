@@ -14,9 +14,9 @@ header{
     height:120px;
     top:0;
     left:0;
-    background: linear-gradient(#c0e00b, #ffbd0a);
+    background: linear-gradient(#c0e00b, yellow);
     border-bottom:1px solid #c0e00b;
-    z-index:100;
+    z-index:200;
 }
 nav{
     height:40px;
@@ -29,7 +29,7 @@ h1{
     position:fixed;
     width:100%;
     top:40px;
-    color:white;
+    color:rgb(34, 75, 170);
     text-align:center;
 }
 .bg{
@@ -41,15 +41,15 @@ h1{
 }
 .agence{
     position:relative;
-    background: linear-gradient(#c0e00b, #ffbd0a);
+    background: linear-gradient(#c0e00b, yellow);
 }
 h2{
     font-size:40px;
     margin-top:20px;
-    color:white;
+    color:rgb(34, 75, 170);
 }
 .agence p{
-    color:white;
+    color:rgb(34, 75, 170);
 }
 .logo{
     position:absolute;
@@ -95,7 +95,7 @@ h4{
 form{
     position:relative;
     width:100%;
-     background: linear-gradient(#c0e00b, yellow);
+    background: linear-gradient(#c0e00b, yellow);
     border-bottom:1px solid #c0e00b;
     padding:5px;
     color:rgb(34, 75, 170);
