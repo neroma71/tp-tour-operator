@@ -97,7 +97,7 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
                 <?php foreach ($destinations as $destination) : ?>
                     <div class="destination" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
                         <h4>Destination : <?php echo $destination->getLocation(); ?></h4>
-                        <p>Prix : <?php echo $destination->getPrice(); ?> €</p>;
+                        <p>Prix : <?php echo $destination->getPrice(); ?> €</p>
                     </div>
                 <?php endforeach; ?>
             </div>
