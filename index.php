@@ -37,13 +37,20 @@ $destinations = $manager->getAllDestinations();
             <h1>Comparo.FR</h1>
         </header>
         <div class="background">
-
+        <div id="slider">
+    <?php
+    $premiumTourOperators = $manager->getPremiumTourOperators();
+    foreach ($premiumTourOperators as $operator) {
+        echo '<img src="' . $operator->getImage() . '" alt="' . $operator->getName() . '" class="active">';
+    }
+    ?>
+</div>
         </div>
         <section>
             <div class="row justify-content-center affichage">
                 <h2>Les destinations du moment ! </h2>
                 <?php foreach ($destinations as $destination) : ?>
-                    <a href="liste.php?location=<?php echo $destination->getLocation(); ?>" class="col-3 m-3" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
+                        <a href="liste.php?location=<?php echo $destination->getLocation(); ?>" class="col-3 m-3" style="background:url('<?php echo $destination->getImage(); ?>')top center no-repeat; background-size:cover;">
                         <p class="dest">Destination : <?php echo $destination->getLocation(); ?></p>
                         <p class="prix">Prix <?php echo $destination->getPrice(); ?> €</p>
                     </a>
@@ -56,10 +63,28 @@ $destinations = $manager->getAllDestinations();
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script>
-            let bg = document.querySelector('.background');
-            window.addEventListener('scroll', ()=>{
-                bg.style.backgroundPositionY = -window.scrollY / 1.5 + 'px';
-            });
+            
+        let image = document.querySelectorAll('#slider img');
+        let nbImage = image.length;
+        let count = 0;
+
+        function clra(){
+             for(let img of image){
+            img.classList.remove("active");
+        }
+        }
+        
+        function slideNext(){
+            count++;
+            if(count >= nbImage){
+                count = 0;
+            }
+            clra();
+            image[count].classList.add("active");
+           
+        }
+         
+        setInterval('slideNext()', 2000);
         </script>
 </body>
 

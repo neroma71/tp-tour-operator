@@ -14,7 +14,7 @@ header{
     height:120px;
     top:0;
     left:0;
-    background: linear-gradient(#c0e00b, yellow);
+    background: linear-gradient(#c0e00b, #ffbd0a);
     border-bottom:1px solid #c0e00b;
     z-index:100;
 }
@@ -40,7 +40,8 @@ h1{
     background-size:cover;
 }
 .agence{
-    background:#26282b;
+    position:relative;
+    background: linear-gradient(#c0e00b, #ffbd0a);
 }
 h2{
     font-size:40px;
@@ -51,11 +52,12 @@ h2{
     color:white;
 }
 .logo{
-    position:relative;
+    position:absolute;
     height:100px;
     width:100px;
+    top:20%;
+    left:80%;
     z-index:100;
-    background:red;
 }
 .destination{
     height:250px;

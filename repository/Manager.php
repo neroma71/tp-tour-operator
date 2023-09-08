@@ -275,4 +275,18 @@ class Manager
             return null;
         }
     }
+
+    public function getPremiumTourOperators()
+{
+    $query = 'SELECT * FROM tour_operator WHERE is_premium = 1';
+    $stmt = $this->db->query($query);
+    $premiumOperatorsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $premiumOperators = [];
+
+    foreach ($premiumOperatorsData as $premiumOperatorData) {
+        $premiumOperators[] = new TourOperateur($premiumOperatorData);
+    }
+
+    return $premiumOperators;
+}
 }
