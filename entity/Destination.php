@@ -5,7 +5,7 @@
     private $location;
     private $price;
     private $tour_operator_id;
-    private $img;
+    private $image;
 
     public function __construct(array $datas)
         {
@@ -92,25 +92,7 @@
         return $this;
     }
 
-     /**
-     * Get the value of image
-     */ 
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
-     * Set the value of image
-     *
-     * @return  self
-     */ 
-    public function setImg($img)
-    {
-        $this->img = $img;
-
-        return $this;
-    }
+     
 
     public function hydrate(array $datas)
     {
@@ -131,9 +113,29 @@
         }
         if(isset($datas["img"]))
         {
-            $this->setImg($datas["img"]);
+            $this->setImage($datas["img"]);
         }
      
+    }
+
+    /**
+     * Get the value of image
+     */ 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set the value of image
+     *
+     * @return  self
+     */ 
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }
 

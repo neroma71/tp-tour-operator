@@ -6,12 +6,14 @@
     if (isset($_POST['updateOperator'])) {
         $tourOperatorId = $_POST['tour_operator_id'];
         $isPremium = $_POST['is_premium'];
+        $link = $_POST['link'];
     
         try {
             // Mettez à jour le tour-opérateur avec le statut premium en fonction de l'ID
-            $sql = "UPDATE tour_operator SET is_premium = :is_premium WHERE id = :id";
+            $sql = "UPDATE tour_operator SET is_premium = :is_premium, link = :link WHERE id = :id";
             $stmt = $bdd->prepare($sql);
             $stmt->bindParam(':is_premium', $isPremium, PDO::PARAM_INT);
+            $stmt->bindParam(':link', $link, PDO::PARAM_STR);
             $stmt->bindParam(':id', $tourOperatorId, PDO::PARAM_INT);
             $stmt->execute();
             

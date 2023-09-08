@@ -37,7 +37,7 @@ class TourOperateurRepository
     if ($destinationData) {
         return new Destination($destinationData);
     } else {
-        return null; // La destination avec cet ID n'a pas été trouvée
+        return null; 
     }
 }
 
@@ -64,11 +64,11 @@ public function getDestinationByLocation($destinationLocation)
     }
 }
 
-public function getTourOperatorById($operatorId)
+public function getTourOperatorById($tour_operator_id)
 {
-    $query = 'SELECT * FROM tour_operator WHERE id = :operatorId';
+    $query = 'SELECT * FROM tour_operator WHERE id = :tour_operator_id';
     $stmt = $this->bdd->prepare($query);
-    $stmt->bindParam(':operatorId', $operatorId, PDO::PARAM_INT);
+    $stmt->bindParam(':tour_operator_id', $tour_operator_id, PDO::PARAM_INT);
     $stmt->execute();
 
     $tourOperatorData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -76,7 +76,7 @@ public function getTourOperatorById($operatorId)
     if ($tourOperatorData) {
         return new TourOperateur($tourOperatorData);
     } else {
-        return null; // L'opérateur de tour avec cet ID n'a pas été trouvé
+        return null; 
     }
 }
 
@@ -133,7 +133,7 @@ public function getTourOperatorsByDestinationId($destinationId)
             $stmt->bindParam(':tour_operator_id', $tourOperatorId, PDO::PARAM_INT);
             $stmt->execute();
         
-            // Récupérez les résultats sous forme d'un tableau d'objets Review
+          
             $reviews = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $review = new Review($row);
@@ -159,11 +159,13 @@ public function getTourOperatorsByDestinationId($destinationId)
 
     public function updateOperatorToPremium($operatorId)
     {
-        $query = 'UPDATE tour_operator SET is_premium = 1 WHERE id = :operatorId';
+        $query = 'UPDATE tour_operator SET is_premium = 1,link = :link WHERE id = :operatorId';
 
         try {
             $stmt = $this->bdd->prepare($query);
             $stmt->bindParam(':operatorId', $operatorId, PDO::PARAM_INT);
+            $stmt->bindParam(':is_premium', $isPremium, PDO::PARAM_INT);
+            $stmt->bindParam(':link', $link, PDO::PARAM_STR);
             $stmt->execute();
         } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
@@ -173,44 +175,35 @@ public function getTourOperatorsByDestinationId($destinationId)
     public function createTourOperator(TourOperateur $tourOperateur)
     {
         try {
-            // Préparez une requête SQL pour insérer un nouvel enregistrement dans la table tour_operator
-            $query = "INSERT INTO tour_operator (name, link, grade_count, grade_total, is_premium, img) 
-                      VALUES (:name, :link, :grade_count, :grade_total, :is_premium, :img)";
+            
+            $query = "INSERT INTO tour_operator (name, link, grade_count, grade_total, is_premium, image) 
+                      VALUES (:name, :link, :grade_count, :grade_total, :is_premium, :image)";
 
-        $uploadedFile = $_FILES['img'];
+        $uploadedFile = $_FILES['image'];
         if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
 
-        // Définir le chemin où enregistrer le fichier
-        $uploadDir = './uploads/'; // Répertoire où vous souhaitez stocker les images
+        
+        $uploadDir = 'uploads/';
         $uploadPath = $uploadDir . basename($uploadedFile['name']);
 
-        // Déplacer le fichier vers le répertoire d'upload
         move_uploaded_file($uploadedFile['tmp_name'], $uploadPath);
 
-        // Enregistrement du chemin dans la base de données
-        $tourOperateur->setImg($uploadPath);
+        $tourOperateur->setImage($uploadPath);
         }
-            // Utilisez PDO pour préparer la requête
             $stmt = $this->bdd->prepare($query);
 
-            // Associez les valeurs des propriétés de l'objet TourOperateur aux paramètres de la requête
             $stmt->bindValue(':name', $tourOperateur->getName());
             $stmt->bindValue(':link', $tourOperateur->getLink());
             $stmt->bindValue(':grade_count', $tourOperateur->getGradeCount());
             $stmt->bindValue(':grade_total', $tourOperateur->getGradeTotal());
             $stmt->bindValue(':is_premium', $tourOperateur->getIsPremium());
-            $stmt->bindValue(':img', $tourOperateur->getImg());
+            $stmt->bindValue(':image', $tourOperateur->getImage());
 
-            // Exécutez la requête pour insérer l'enregistrement dans la base de données
             $stmt->execute();
 
-            // Vous pouvez gérer les succès ou les erreurs ici
-            // Par exemple, retourner l'identifiant de l'enregistrement inséré
             return $this->bdd->lastInsertId();
         } 
         catch (PDOException $e) {
-            // Gestion des erreurs
-            // Vous pouvez enregistrer l'erreur dans un journal, afficher un message d'erreur, etc.
             echo 'Erreur : ' . $e->getMessage();
             return false; // Ou tout autre traitement d'erreur que vous préférez
         }
@@ -219,42 +212,31 @@ public function getTourOperatorsByDestinationId($destinationId)
     public function createDestination(Destination $destination)
     {
         try {
-            // Préparez une requête SQL pour insérer un nouvel enregistrement dans la table tour_operator
-            $query = "INSERT INTO destination (location, price, tour_operator_id, img) 
-                          VALUES (:location, :price, :tour_operator_id, :img)";
-                $uploadedFile = $_FILES['img'];
+            $query = "INSERT INTO destination (location, price, tour_operator_id, image) 
+                          VALUES (:location, :price, :tour_operator_id, :image)";
+                $uploadedFile = $_FILES['image'];
                 if ($uploadedFile['error'] === UPLOAD_ERR_OK) {
         
-                // Définir le chemin où enregistrer le fichier
-                $uploadDir = './uploads/'; // Répertoire où vous souhaitez stocker les images
+                $uploadDir = 'uploads/'; 
                 $uploadPath = $uploadDir . basename($uploadedFile['name']);
         
-                // Déplacer le fichier vers le répertoire d'upload
                 move_uploaded_file($uploadedFile['tmp_name'], $uploadPath);
         
-                // Enregistrement du chemin dans la base de données
-                $destination->setImg($uploadPath);
+                $destination->setImage($uploadPath);
                 }
-            // Utilisez PDO pour préparer la requête
             $stmt = $this->bdd->prepare($query);
 
-            // Associez les valeurs des propriétés de l'objet TourOperateur aux paramètres de la requête
             $stmt->bindValue(':location', $destination->getLocation());
             $stmt->bindValue(':price', $destination->getPrice());
             $stmt->bindValue(':tour_operator_id', $destination->getTour_operator_id());
-            $stmt->bindValue(':img', $destination->getImg());
+            $stmt->bindValue(':image', $destination->getImage());
 
-            // Exécutez la requête pour insérer l'enregistrement dans la base de données
             $stmt->execute();
 
-            // Vous pouvez gérer les succès ou les erreurs ici
-            // Par exemple, retourner l'identifiant de l'enregistrement inséré
             return $this->bdd->lastInsertId();
         } catch (PDOException $e) {
-            // Gestion des erreurs
-            // Vous pouvez enregistrer l'erreur dans un journal, afficher un message d'erreur, etc.
             echo 'Erreur : ' . $e->getMessage();
-            return false; // Ou tout autre traitement d'erreur que vous préférez
+            return false; //
         }
     }
 
@@ -265,11 +247,10 @@ public function getTourOperatorsByDestinationId($destinationId)
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        // Vérifiez si une ligne a été trouvée avant de retourner l'identifiant
         if ($row) {
             return $row['id'];
         } else {
-            return null; // ou une valeur par défaut appropriée
+            return null; 
         }
     }
 
@@ -292,4 +273,35 @@ public function getTourOperatorsByDestinationId($destinationId)
 
         return $this;
     }
+
+    public function updateTourOperatorGrade(TourOperateur $tourOperator)
+    {
+        $query = 'UPDATE tour_operator SET grade_count = :grade_count, grade_total = :grade_total WHERE id = :id';
+        $stmt = $this->bdd->prepare($query);
+        $stmt->bindParam(':grade_count', $tourOperator->getGradeCount(), PDO::PARAM_INT);
+        $stmt->bindParam(':grade_total', $tourOperator->getGradeTotal(), PDO::PARAM_INT);
+        $stmt->bindParam(':id', $tourOperator->getId(), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    
+
+    public function getPriceById($tourOperatorId) {
+
+        $sql = "SELECT price FROM destination WHERE id = :tourOperatorId";
+
+        $stmt = $this->bdd->prepare($sql);
+
+        $stmt->bindParam(':tourOperatorId', $tourOperatorId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row && isset($row['price'])) {
+            return $row['price'];
+        } else {
+            return "Prix non disponible";
+        }
+    }
+
 }

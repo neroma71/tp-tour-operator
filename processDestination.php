@@ -17,6 +17,7 @@
     $location = $_POST['location'];
     $price = $_POST['price'];
     $tour_operator_id = $_POST['tour_operator_id'];
+    $uploadedFile = $_FILES['image'];
 
     // Créer un objet TourOperateur avec les données
     $destination = new Destination([

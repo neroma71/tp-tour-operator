@@ -9,26 +9,29 @@
 
 <body>
     <?php
-    // Inclure vos classes et initialiser PDO
     require_once './Utils/db_connect.php';
     require_once './Utils/loadClass.php';
 
-    // Récupérer les données soumises depuis le formulaire
+    // Récupérer 
     $name = $_POST['name'];
     $link = $_POST['link'];
     $is_premium = isset($_POST['is_premium']) ? 1 : 0;
+    $gradeCount = $_POST['grade_count']; 
+$gradeTotal = $_POST['grade_total'];
+    $uploadedFile = $_FILES['image'];
 
-    // Créer un objet TourOperateur avec les données
+
     $tourOperateur = new TourOperateur([
         'name' => $name,
         'link' => $link,
-        'is_premium' => $is_premium
+        'is_premium' => $is_premium,
+        'grade_count' => $gradeCount,
+    'grade_total' => $gradeTotal,
+        'image' => $uploadedFile['name']
     ]);
 
-    // Créer un objet TourOperateurRepository avec la connexion PDO
     $tourOperateurRepository = new TourOperateurRepository($bdd);
 
-    // Appeler la méthode createTourOperator pour insérer le nouvel opérateur
     $insertedId = $tourOperateurRepository->createTourOperator($tourOperateur);
 
     if ($insertedId !== false) {
@@ -37,7 +40,7 @@
         echo "Une erreur s'est produite lors de la création de l'opérateur.";
     }
 
-    
+    header("Location: ./admin.php");
 
     ?>
 </body>

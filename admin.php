@@ -32,6 +32,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
 
@@ -42,7 +43,10 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     require_once './Utils/loadClass.php';
     $manager = new TourOperateurRepository($bdd);
     ?>
-
+    <div class="container">
+        <h2>Espace Administration</h2>
+<div class="ajoutTO" >
+    <h3>Ajouter Tour Operateur :</h3>
     <form action="processTourOperator.php" method="POST" enctype="multipart/form-data">
         <label for="name">Nom :</label>
         <input type="text" id="name" name="name" required><br>
@@ -53,16 +57,25 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
         <label for="is_premium">Premium :</label>
         <input type="checkbox" id="is_premium" name="is_premium"><br>
 
+        <label for="grade_count">Grade Count :</label>
+    <input type="number" id="grade_count" name="grade_count" required><br>
+
+    <label for="grade_total">Grade Total :</label>
+    <input type="number" id="grade_total" name="grade_total" required><br>
+
+
         <label for="img">Image :</label>
-        <input type="file" id="img" name="img" accept="image/*">
+        <input type="file" id="imgage" name="image" accept="image/*">
+ 
 
         <input type="submit" value="Créer l'opérateur">
     </form>
 
+    </div>
 
-
-    <!-- ajouter destination a une TO-->
-    <h2>Ajouter une Destination à un Tour-Opérateur</h2>
+    <div  class="ajoutDes">
+    
+    <h3>Ajouter une Destination à un Tour-Opérateur :</h3>
     <form method="post" action="processDestination.php" enctype="multipart/form-data">
         <label for="location">location :</label>
         <input type="text" id="location" name="location">
@@ -78,13 +91,15 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
             }
             ?>
         </select>
-        <label for="img">Image :</label>
-        <input type="file" id="img" name="img" accept="image/*">
+        <label for="image">Image :</label>
+        <input type="file" id="image" name="image" accept="image/*">
         <input type="submit" value="Ajouter">
     </form>
+    </div>
 
+    <div class="update">
     <form action="processPremium.php" method="post">
-    <h2>Mettre à jour un Tour-Opérateur</h2>
+    <h3>Mettre à jour un Tour-Opérateur :</h3>
     <label for="tour_operator_id">Sélectionnez le Tour-Opérateur :</label>
     <select id="tour_operator_id" name="tour_operator_id">
     <?php
@@ -101,8 +116,12 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
         <option value="0">Non</option>
         <option value="1">Oui</option>
     </select>
+    <label for="link">location :</label>
+        <input type="text" id="link" name="link">
     <input type="submit" name="updateOperator" value="Mettre à jour">
 </form>
+    </div>
+    </div>
 </body>
 
 </html>

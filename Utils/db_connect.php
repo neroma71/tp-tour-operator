@@ -1,5 +1,5 @@
 <?php
-$dns = "mysql:host=localhost;dbname=comparo_simple";
+$dns = "mysql:host=localhost;dbname=tour_operateur";
 $user = "root";
 $password = "";
 
