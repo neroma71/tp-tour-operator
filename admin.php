@@ -57,12 +57,6 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
         <label for="is_premium">Premium :</label>
         <input type="checkbox" id="is_premium" name="is_premium"><br>
 
-        <label for="grade_count">Grade Count :</label>
-    <input type="number" id="grade_count" name="grade_count" required><br>
-
-    <label for="grade_total">Grade Total :</label>
-    <input type="number" id="grade_total" name="grade_total" required><br>
-
 
         <label for="img">Image :</label>
         <input type="file" id="imgage" name="image" accept="image/*">
@@ -103,12 +97,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <label for="tour_operator_id">Sélectionnez le Tour-Opérateur :</label>
     <select id="tour_operator_id" name="tour_operator_id">
     <?php
-    $sql = "SELECT id, name FROM tour_operator";
-    $result = $bdd->query($sql);
-    $rows = $result->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($rows as $row) {
-        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
-    }
+    $tourOpsIdName = $manager->getTourOperatorNameAndId()
     ?>
     </select>
     <label for="is_premium">Passer en Premium :</label>
@@ -116,8 +105,6 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
         <option value="0">Non</option>
         <option value="1">Oui</option>
     </select>
-    <label for="link">location :</label>
-        <input type="text" id="link" name="link">
     <input type="submit" name="updateOperator" value="Mettre à jour">
 </form>
     </div>
