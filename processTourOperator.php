@@ -10,7 +10,7 @@
 <body>
     <?php
     // Inclure vos classes et initialiser PDO
-    require_once './Utils/db_connect.php';
+    require_once './Utils/connexion.php';
     require_once './Utils/loadClass.php';
 
     // Récupérer les données soumises depuis le formulaire
@@ -22,17 +22,21 @@
     $tourOperateur = new TourOperateur([
         'name' => $name,
         'link' => $link,
-        'is_premium' => $is_premium
+        'is_premium' => $is_premium,
+        'grade_count' => 0,
+        'grade_total' => 0
     ]);
 
+
     // Créer un objet TourOperateurRepository avec la connexion PDO
-    $tourOperateurRepository = new TourOperateurRepository($bdd);
+    $tourOperateurRepository = new Manager($bdd);
 
     // Appeler la méthode createTourOperator pour insérer le nouvel opérateur
     $insertedId = $tourOperateurRepository->createTourOperator($tourOperateur);
 
     if ($insertedId !== false) {
         echo "L'opérateur a été créé avec l'identifiant $insertedId.";
+        header('Location: ./admin.php');
     } else {
         echo "Une erreur s'est produite lors de la création de l'opérateur.";
     }

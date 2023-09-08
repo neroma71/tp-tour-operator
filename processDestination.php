@@ -10,7 +10,7 @@
 <body>
     <?php
     // Inclure vos classes et initialiser PDO
-    require_once './Utils/db_connect.php';
+    require_once './Utils/connexion.php';
     require_once './Utils/loadClass.php';
 
     // Récupérer les données soumises depuis le formulaire
@@ -26,7 +26,7 @@
     ]);
 
     // Créer un objet TourOperateurRepository avec la connexion PDO
-    $tourOperateurRepository = new TourOperateurRepository($bdd);
+    $tourOperateurRepository = new Manager($bdd);
 
     // Appeler la méthode createTourOperator pour insérer le nouvel opérateur
     $insertedId = $tourOperateurRepository->createDestination($destination);
