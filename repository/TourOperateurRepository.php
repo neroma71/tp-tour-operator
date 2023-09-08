@@ -41,6 +41,27 @@ class TourOperateurRepository
     }
 }
 
+public function getDestinationsByTourOperatorId($tourOperatorId)
+    {
+        $query = 'SELECT * FROM destination WHERE tour_operator_id  = :id';
+        $stmt = $this->bdd->prepare($query);
+        $stmt->bindParam(':id', $tourOperatorId, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $destinationsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $destinations = [];
+
+        if ($destinationsData) {
+            foreach ($destinationsData as $destinationData) {
+                $destinations[] = new Destination($destinationData);
+            }
+            return $destinations;
+        } else {
+            return null;
+        }
+    }
+
 public function getDestinationByLocation($destinationLocation)
 {
     $query = 'SELECT * FROM destination WHERE location = :location';
@@ -77,6 +98,16 @@ public function getTourOperatorById($operatorId)
         return new TourOperateur($tourOperatorData);
     } else {
         return null; // L'opérateur de tour avec cet ID n'a pas été trouvé
+    }
+}
+
+public function getTourOperatorNameAndId() {
+
+    $sql = "SELECT id, name FROM tour_operator";
+    $result = $this->bdd->query($sql);
+    $rows = $result->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($rows as $row) {
+        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
     }
 }
 
@@ -271,6 +302,16 @@ public function getTourOperatorsByDestinationId($destinationId)
         } else {
             return null; // ou une valeur par défaut appropriée
         }
+    }
+
+    public function isPremium() {
+        $sql = "UPDATE tour_operator SET is_premium = :is_premium WHERE id = :id";
+        $stmt = $this->bdd->prepare($sql);
+        $stmt->bindParam(':is_premium', $isPremium, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $tourOperatorId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        echo "Le statut premium du tour-opérateur a été mis à jour avec succès.";
     }
 
     /**

@@ -20,7 +20,116 @@ body{
     width:340px;
     height:300px; 
     padding:5px;
-    overflow-y:auto;
+    overflow-y:auto;*{
+        font-family:Helvetica, sans-serif;
+    }
+    body{
+        margin:0;
+        padding:0;
+        min-height:100vh;
+        width:100vw;
+        overflow-x:hidden;
+    }
+    header{
+        position:fixed;
+        width:100%;
+        height:120px;
+        top:0;
+        left:0;
+        background: linear-gradient(#c0e00b, yellow);
+        border-bottom:1px solid #c0e00b;
+        z-index:100;
+    }
+    nav{
+        height:40px;
+        border-bottom:1px solid white;
+    }
+    .navbar-toggler{
+        margin-top:-10px;
+    }
+    h1{
+        position:fixed;
+        width:100%;
+        top:40px;
+        color:white;
+        text-align:center;
+    }
+    .bg{
+        height:350px;
+        margin-top:120px;
+        margin-bottom:25px;
+        background:url(../images/rio.jpg)top center fixed no-repeat;
+        background-size:cover;
+    }
+    .agence{
+        background:#26282b;
+    }
+    h2{
+        font-size:40px;
+        margin-top:20px;
+        color:white;
+    }
+    .agence p{
+        color:white;
+    }
+    .logo{
+        position:relative;
+        height:100px;
+        width:100px;
+        z-index:100;
+        background:red;
+    }
+    .destination{
+        height:250px;
+        margin-top:20px;
+        border-radius:5px;
+    }
+    h4{
+        position:relative;
+        top:20px;
+        height:30px;
+        text-align:center;
+        background:rgb(34, 75, 170);
+        color:white;
+    }
+    .destination p{
+        position:relative;
+        height:30px;
+        top:50px;
+        text-align:center;
+        background:rgb(34, 75, 170);
+        color:white;
+    }
+    .messagerie{
+        margin-top:20px;
+        text-align:left;
+    }
+    .msg{
+        position:relative;
+        height:300px; 
+        padding:5px;
+        border:1px solid rgb(34, 75, 170);
+        color:rgb(34, 75, 170);
+        overflow-y:auto;
+    }
+    form{
+        position:relative;
+        width:100%;
+         background: linear-gradient(#c0e00b, yellow);
+        border-bottom:1px solid #c0e00b;
+        padding:5px;
+        color:rgb(34, 75, 170);
+    }
+    input[type=text]{
+        margin-top:5px;
+    }
+    input[type=number]{
+        width:50px;
+    }
+    #mymsg{
+        width:100%;
+        height:50px;
+    }
 }
 form{
     background:grey;

@@ -88,12 +88,7 @@ if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
     <label for="tour_operator_id">Sélectionnez le Tour-Opérateur :</label>
     <select id="tour_operator_id" name="tour_operator_id">
     <?php
-    $sql = "SELECT id, name FROM tour_operator";
-    $result = $bdd->query($sql);
-    $rows = $result->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($rows as $row) {
-        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
-    }
+    $touropsNameId = $manager->getTourOperatorNameAndId();
     ?>
     </select>
     <label for="is_premium">Passer en Premium :</label>
