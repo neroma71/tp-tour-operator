@@ -88,8 +88,15 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
                     echo '<h2>Agence : ' . $tourOperator->getName() . '</h2>';
                     echo '<p><a href"mailto:' . $tourOperator->getLink() . '"> Site :' . $tourOperator->getLink() . '</a></p>';
                     echo '<p> Nombre de note : ' . $tourOperator->getGrade_count() . '</p>';
-                    echo '<p> Note totale : ' . $tourOperator->getGrade_total() . '</p>';
-                    echo '<div class="logo" style="background:url(' . $tourOperator->getImage() . ')top right no-repeat; background-size:cover;"></div>';
+                    //echo '<p> Note totale : ' . $tourOperator->getGrade_total() . '</p>';
+                    if($tourOperator->getGrade_count() > 0){
+                        $moyenne = $tourOperator->getGrade_total() / (int)$tourOperator->getGrade_count();
+                    $arrondie = round($moyenne);
+                    echo '<p> moyenne '.$arrondie.' / 5</p>';
+                    }else{
+                        echo "<p>pas de note pour l'instant</p>";
+                    }
+                    echo '<div class="logo" style="background:url(' . $tourOperator->getImage() . ')top center no-repeat; background-size:cover;"></div>';
                 }
                 ?>
             </div>
@@ -128,9 +135,26 @@ $tourOperator = $manager->getTourOperatorById($tourOperatorId);
         </div>
     </section>
     <script>
+        let header = document.querySelector('header');
         let bg = document.querySelector('.bg');
         window.addEventListener('scroll', () => {
             bg.style.backgroundPositionY = window.scrollY / 1.5 + 'px';
+        });
+
+        window.addEventListener('scroll', ()=>{
+            if(window.scrollY > 200){
+                header.classList.add('header2');
+            }else{
+                header.classList.remove('header2');
+            }
+        });
+        
+        window.addEventListener('scroll', ()=>{
+            if(window.scrollY > 120){
+                header.classList.add('header2');
+            }else{
+                header.classList.remove('header2');
+            }
         });
     </script>
 </body>

@@ -65,6 +65,7 @@ $destinations = $manager->getAllDestinations();
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>
+        let header = document.querySelector('header');
         let slider = document.querySelectorAll('#slider');
         let image = document.querySelectorAll('#slider img');
         let text = document.querySelector('.text');
@@ -93,6 +94,15 @@ $destinations = $manager->getAllDestinations();
         }
 
         setInterval('slideNext()', 2000);
+
+        window.addEventListener('scroll', ()=>{
+            if(window.scrollY > 200){
+                header.classList.add('header2');
+            }else{
+                header.classList.remove('header2');
+            }
+        });
+
     </script>
 </body>
 
